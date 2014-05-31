@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+    <head>  
+        <meta charset="<?php bloginfo( 'charset' ); ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >                                     
+        <title>{% block title %}{% if article %}{{ article.title }} | {% endif %}{{ SITENAME }}{% endblock title %}</title>
+        {% include "_feeds.html" %}    
+    </head>
+    
+    <body class="{% if articles_page %} blog{% endif %}">
+    
+        <div class="wrapper">
+    
+            <div class="sidebar">
+                            
+                <div class="blog-header">
+                
+                    <h1 class="blog-title">
+                        <a href="{{ SITE_URL }}" title="{{ SITENAME }}" rel="home">{{ SITENAME }}</a>
+                    </h1>
+                    {% if DESCRIPTION %}
+                        <h3 class="blog-description">{{ DESCRIPTION }}</h3>
+                    {% endif %}
+                    
+                    <div class="nav-toggle toggle">
+                            
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        
+                        <div class="clear"></div>
+                    
+                    </div>
+
+                </div> <!-- /blog-header -->
+                
+                <div class="blog-menu">
+            
+                    <ul class="navigation">
+                        {% for title, link in MENUITEMS %}
+                            <li><a class="links" href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
+                        {% endfor %}
+                     </ul>
+                     
+                     <div class="clear"></div>
+                     
+                </div> <!-- /blog-menu -->
+                
+                <div class="mobile-menu">
+                         
+                     <ul class="navigation">
+                        {% for title, link in MENUITEMS %}
+                            <li><a class="links" href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
+                        {% endfor %}
+                     </ul>
+                     
+                </div> <!-- /mobile-menu -->
+        
+                                    
+            </div> <!-- /sidebar -->
+
+            <div class="content">
+
+                {% block content %}{% endblock %}
+            
+                <div class="credits">
+                    <div class="credits-inner">
+                        <p class="credits-left">
+                            &copy; 2014 <a href="{{ SITEURL }}" title="{{ SITENAME }}">{{ SITENAME }}</a>
+                        </p>
+                        <p class="credits-right">
+                            <span>Theme by <a href="http://www.andersnoren.se">Anders Noren</a></span> &mdash; <a title="To the top" class="tothetop">Up &uarr;</a>
+                        </p>
+                        <div class="clear"></div>
+                    </div> <!-- /credits-inner -->
+                </div> <!-- /credits -->
+            </div> <!-- /content -->
+            <div class="clear"></div>
+        </div> <!-- /wrapper -->
+        <script type="text/javascript" src="{{ SITEURL }}/theme/js/global.js?v={{ VERSION }}"></script>
+    </body>
+</html>

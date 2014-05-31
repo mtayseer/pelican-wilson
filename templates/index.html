@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for article in articles_page.object_list %}
+  {% include "_post.html" %}
+{% endfor %}
+
+
+    <?php if (have_posts()) : ?>
+
+    <div class="page-title">
+        {% if articles_page.has_previous()  %}
+            <h4>Page {{ articles_page.number }} of {{ articles_paginator.num_pages }}</h4>
+        {% endif %}
+    </div>
+                        
+    
+        <div class="posts">
+            {% for article in articles_page.object_list %}
+            
+            <?php while (have_posts()) : the_post(); ?>
+            
+                <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            
+                    <?php get_template_part( 'content', get_post_format() ); ?>
+                                        
+                </div> <!-- /post -->
+                                                
+            <?php endwhile; ?>
+            {% endfor %}
+
+                                
+        <?php endif; ?>
+        
+        </div> <!-- /posts -->
+    
+    <?php if ( $wp_query->max_num_pages > 1 ) : ?>
+    
+        <div class="archive-nav">
+                    
+            <?php echo get_next_posts_link( __('&laquo; Older<span> posts</span>', 'wilson')); ?>
+                        
+            <?php echo get_previous_posts_link( __('Newer<span> posts</span> &raquo;', 'wilson')); ?>
+            
+            <div class="clear"></div>
+            
+        </div> <!-- /post-nav archive-nav -->
+    
+    <?php endif; ?>
+{% endblock %}
