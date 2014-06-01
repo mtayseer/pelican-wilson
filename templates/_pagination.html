@@ -1,0 +1,13 @@
+{% if articles_page.has_other_pages() %}    
+    <div class="archive-nav">
+        {% if articles_page.has_next() %}
+            <a class="post-nav-older" href="{{ SITEURL }}/{{ articles_next_page.url }}">&laquo; Older posts</a>
+        {% endif %}
+        
+        {% if articles_page.has_previous()  %}
+            <a class="post-nav-newer" href="{{ SITEURL }}/{{ articles_previous_page.url }}">Newer posts &raquo;</a>
+        {% endif %}
+        
+        <div class="clear"></div>
+    </div> <!-- /post-nav archive-nav -->
+{% endif %}

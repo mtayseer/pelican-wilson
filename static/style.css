@@ -845,18 +845,20 @@ em, q {  font-style: italic;  }
 
 abbr, acronym { cursor: help; }
 
-code, kbd, pre {
+code, kbd, pre, tt {
 	font-size: 0.85em;
 	background: #EEE;
-	font-family: Menlo, Monaco, monospace;
+	font-family: 'Source Code Pro', monospace;
 }
 
+/*
 .post-content .highlight {
 	background: #fcf8a5;
 	width: auto;
 	display: inline;
 	padding: 2px 3px;
 }
+*/
 
 .post-content kbd,
 .post-content code {
@@ -919,14 +921,10 @@ code, kbd, pre {
 }
 
 .post-content pre {
-	white-space: pre-wrap;       /* css-3 */
-	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-	white-space: -pre-wrap;      /* Opera 4-6 */
-	white-space: -o-pre-wrap;    /* Opera 7 */
-	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 	line-height: 140%;
 	padding: 2% 2.5%;
 	background: #f1f1f1;
+	overflow-x: scroll;
 }
 
 .post-content a.more-link {
@@ -1617,6 +1615,8 @@ li > div.comment {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
+
+.posts + .credits { border-top: 4px solid #EEE; }
 
 .credits a { color: #777; }
 

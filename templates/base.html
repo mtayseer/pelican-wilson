@@ -5,7 +5,50 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >                                     
         <title>{% block title %}{% if article %}{{ article.title }} | {% endif %}{{ SITENAME }}{% endblock title %}</title>
+
+        {% block meta_tags_in_head %}
+            
+        {% if article and article.author %}
+        <meta name="author" content="{{ article.author }}" />
+        <meta name="copyright" content="{{ article.author }}" />
+        {% elif page and page.author %}
+        <meta name="author" content="{{ page.author }}" />
+        <meta name="copyright" content="{{ page.author }}" />
+        {% else %}
+        <meta name="author" content="{{ AUTHOR }}" />
+        <meta name="copyright" content="{{ AUTHOR }}" />
+        {% endif %}
+
+        {% if DESCRIPTION %}
+        <meta name="description" content="{% block head_description %}{{ DESCRIPTION }}{% endblock head_description %}" />
+        {% endif %}
+
+
+        {%if TWITTER_USERNAME %}
+        <meta name="twitter:creator" content="@{{TWITTER_USERNAME}}">
+        {% endif %}
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+        <meta property="og:title" content="{{ SITENAME|striptags|e }}"/>
+        <meta name="twitter:title" content="{{ SITENAME|striptags|e }}">
+        <meta property="og:url" content="{{ SITEURL }}" />
+        {% if DESCRIPTION %}
+        <meta property="og:description" content="{{ DESCRIPTION }}" />
+        <meta name="twitter:description" content="{{ DESCRIPTION }}">
+        {% endif %}
+        <meta property="og:site_name" content="{{ SITENAME|striptags|e }}" />
+        <meta property="og:article:author" content="{{ AUTHOR }}" />
+        {% if article and article.thumbnail %}
+        <meta property="og:image" content="{{ article.thumbnail }}" />
+        <meta name="twitter:image" content="{{ article.thumbnail }}" >
+        {% endif %}
+        {% endblock meta_tags_in_head %}
+
+
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Raleway:400,700|Source+Code+Pro:400,700&ver=3.9.1' type='text/css' media='all' />
         <link rel="stylesheet" href="{{ SITEURL }}/theme/style.css?v={{ VERSION }}">
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/pygments_style.min.css?v={{ VERSION }}">
         {% include "_feeds.html" %}    
     </head>
     
@@ -18,7 +61,7 @@
                 <div class="blog-header">
                 
                     <h1 class="blog-title">
-                        <a href="{{ SITE_URL }}" title="{{ SITENAME }}" rel="home">{{ SITENAME }}</a>
+                        <a href="{{ SITE_URL }}/" title="{{ SITENAME }}" rel="home">{{ SITENAME }}</a>
                     </h1>
                     {% if DESCRIPTION %}
                         <h3 class="blog-description">{{ DESCRIPTION }}</h3>
@@ -79,6 +122,19 @@
             </div> <!-- /content -->
             <div class="clear"></div>
         </div> <!-- /wrapper -->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/global.js?v={{ VERSION }}"></script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS }}']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
     </body>
 </html>

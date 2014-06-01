@@ -1,8 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% include "_post.html" %}
-categories: 
-{% include "_disqus.html" %}
+<div class="posts">
+
+    {% include "_post.html" %}
+    <div class="post-meta-bottom">
+    {% if article.tags %}
+        <div class="post-cat-tags">
+            <p class="post-tags"><span>Tags:</span>
+            {% for tag in article.tags|sort %}
+                <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>                
+            {% endfor %}
+            </p>
+        </div> <!-- /post-cat-tags -->
+    {% endif %}
+    <div class="archive-nav post-nav">
+        {% if article.prev_article %}
+          <a class="post-nav-older" title="Previous post: {{ article.prev_article.title }}" href="{{ SITEURL }}/{{ article.prev_article.url }}">
+            &laquo; {{ article.prev_article.title }}
+          </a>
+        {% endif %}
+        {% if article.next_article %}
+          <a class="post-nav-newer" title="Next post: {{ article.next_article.title }}" href="{{ SITEURL }}/{{ article.next_article.url}}">
+            {{ article.next_article.title }} &raquo;
+          </a>
+        {% endif %}
+      <div class="clear"></div>
+    </div> <!-- /post-nav -->
+  </div>
+  <div class="comments">
+    <h2 class="comments-title">Comments</h2>
+    {% include "_disqus.html" %}
+  </div> 
+</div>
+
 
 {% endblock %}

@@ -1,4 +1,4 @@
-<div class="post type-post status-publish hentry format-{{ article.format }}
+<div class="post type-post status-publish hentry format-{{ article.format or 'standard' }}
         {% for tag in article.tags %} tag-{{ tag }}{% endfor %} 
         {% for category in article.categories %} category-{{ category}}{% endfor %}">
 
@@ -13,13 +13,13 @@
   <div class="post-inner">
     <div class="post-header">
         <h2 class="post-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="{{ article.title }}">{{ article.title }}</a></h2>
-        <div class="post-meta">
-          <span class="post-date"><a href="{{ SITEURL }}/{{ article.url }}" title="{{ article.title }}">{{ article.date }}</a></span>
-          <span class="date-sep"> / </span>
-          <span class="post-author">{{ article.author }}</span>
-          <span class="date-sep"> / </span>
-          <a href="{{ SITEURL }}/{{ article.url }}">Comments</a>
-        </div>
+        {% if article.date %}
+          <div class="post-meta">
+            <span class="post-date"><a href="{{ SITEURL }}/{{ article.url }}" title="{{ article.title }}">{{ article.date.strftime('%Y-%m-%d') }}</a></span>
+            <span class="date-sep"> / </span>
+            <a href="{{ SITEURL }}/{{ article.url }}#disqus_thread">Comments</a>
+          </div>
+        {% endif %}
     </div> <!-- /post-header -->
                                                                 
     <div class="post-content">
@@ -28,3 +28,4 @@
     <div class="clear"></div>
   </div>
 </div> <!-- /post -->
+
