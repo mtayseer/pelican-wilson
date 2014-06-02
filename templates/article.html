@@ -9,7 +9,7 @@
         <div class="post-cat-tags">
             <p class="post-tags"><span>Tags:</span>
             {% for tag in article.tags|sort %}
-                <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>                
+                <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>{% if loop.revindex > 1 %}, {% endif %}
             {% endfor %}
             </p>
         </div> <!-- /post-cat-tags -->
